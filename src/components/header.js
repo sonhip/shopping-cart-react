@@ -1,7 +1,19 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import * as reselect from "pages/cart/reselect/cart-reselect";
+import { createStructuredSelector } from "reselect";
+
 const HeaderComponent = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const { pathname } = useLocation();
+  console.log(pathname);
 
+  const { countItem } = useSelector(
+    createStructuredSelector({
+      countItem: reselect.countItemsSelector,
+    })
+  );
   const handleShowMenu = () => {
     setIsOpenMenu(!isOpenMenu);
   };
@@ -11,12 +23,12 @@ const HeaderComponent = () => {
       <div className="container mx-auto md:flex md:justify-between md:items-center">
         <div className="flex justify-between relative z-10 items-center px-6 py-3 bg-white">
           <div className="">
-            <a
+            <Link
               className="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
-              href="!#"
+              to="/home"
             >
               <p>FOODS & DRINKS</p>
-            </a>
+            </Link>
           </div>
 
           {/* <!-- Mobile menu button --> */}
@@ -44,34 +56,28 @@ const HeaderComponent = () => {
           }`}
         >
           <div className="flex flex-col md:flex-row md:mx-6 ">
-            <a
+            <Link
+              to="/home"
               className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-              href="!#"
             >
               Home
-            </a>
-            <a
-              className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-              href="!#"
-            >
+            </Link>
+            <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
               Shop
-            </a>
-            <a
-              className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-              href="!#"
-            >
+            </Link>
+            <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
               Contact
-            </a>
-            <a
-              className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-              href="!#"
-            >
+            </Link>
+            <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
               About
-            </a>
+            </Link>
           </div>
 
           <div className="flex justify-center md:block">
-            <a className="relative text-gray-700 hover:text-gray-600" href="!#">
+            <Link
+              to="/cart"
+              className="relative text-gray-700 hover:text-gray-600"
+            >
               <svg
                 className="h-5 w-5"
                 viewBox="0 0 24 24"
@@ -86,9 +92,10 @@ const HeaderComponent = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-
-              <span className="absolute top-0 left-0 rounded-full bg-indigo-500 text-white p-1 text-xs"></span>
-            </a>
+              <span className="absolute -top-3 left-3 text-center w-6 h-6 flex justify-center items-center rounded-full bg-indigo-500 text-white p-1 text-xs">
+                {countItem}
+              </span>
+            </Link>
           </div>
         </div>
       </div>

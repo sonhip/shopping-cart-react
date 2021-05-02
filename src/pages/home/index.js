@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import * as reselect from "./reselect/products_reselect";
 import * as actions from "./actions/index";
 import LayoutComponent from "../../components/layout";
-import FeaturedComponent from "./components/featured";
-import LatestComponent from "./components/latest";
-import SellingComponent from "./components/top_selling";
+import FeaturedComponent from "./components/featured/featured";
+import LatestComponent from "./components/latest/latest";
+import SellingComponent from "./components/topSelling/top_selling";
+import Carousel from "components/banner/carousel";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,9 @@ const HomePage = () => {
   }, [dispatch]);
   return (
     <>
+      <div style={{ marginTop: 56 }}>
+        <Carousel />
+      </div>
       <LayoutComponent>
         <FeaturedComponent />
         <LatestComponent />

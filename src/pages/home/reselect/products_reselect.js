@@ -6,6 +6,7 @@ const errorProducts = (state) => state.productsReducer.errorProducts;
 
 export const loadingSelector = createSelector(loadingProducts, (item) => item);
 export const errorSelector = createSelector(errorProducts, (item) => item);
+
 export const getFeaturedSelector = createSelector(productsSelector, (item) => {
   if (item.hasOwnProperty("featured")) {
     return item.featured;

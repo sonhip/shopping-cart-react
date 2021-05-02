@@ -18,7 +18,6 @@ const Carousel = () => {
           fontSize: "40px",
         }}
         onClick={onClick}
-        Prev
       />
     );
   }
@@ -56,7 +55,7 @@ const Carousel = () => {
         <Slider {...settings}>
           {data.map((item, index) => {
             return (
-              <div className="w-full focus:outline-none">
+              <div key={item.id} className="w-full focus:outline-none">
                 <img
                   className="w-full object-cover "
                   src={item.imgSrc}

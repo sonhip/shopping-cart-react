@@ -1,4 +1,4 @@
-import "../style.scss";
+import "../../utils/style.scss";
 const Loading = () => (
   <div className="loadable">
     <div className="scaling-squares-spinner">

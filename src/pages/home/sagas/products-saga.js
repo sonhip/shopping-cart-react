@@ -3,11 +3,20 @@ import * as actions from "../actions/index";
 import * as types from "../actions/types";
 import * as api from "../../../services/api";
 
+const isEmptyObject = (obj) => {
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      return false;
+    }
+  }
+  return true;
+};
+
 function* getDataSaga() {
   try {
     yield put(actions.startGetData(true));
     const data = yield call(api.getDataProducts);
-    if (data) {
+    if (!isEmptyObject(data)) {
       yield put(actions.getDataSuccess(data));
     } else {
       yield put(

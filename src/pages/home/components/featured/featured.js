@@ -1,0 +1,25 @@
+import React from "react";
+import ListCards from "../list-card/list_cards";
+import * as reselect from "../../reselect/products_reselect";
+import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
+
+const FeaturedProducts = () => {
+  const { loading, featured } = useSelector(
+    createStructuredSelector({
+      loading: reselect.loadingSelector,
+      featured: reselect.getFeaturedSelector,
+    })
+  );
+
+  return (
+    <>
+      <div className="mx-auto my-8">
+        <h2>Feature Products</h2>
+      </div>
+      <ListCards loading={loading} data={featured} />
+    </>
+  );
+};
+
+export default React.memo(FeaturedProducts);
