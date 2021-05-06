@@ -2,15 +2,7 @@ import { put, call, takeLatest } from "redux-saga/effects";
 import * as actions from "../actions/index";
 import * as types from "../actions/types";
 import * as api from "../../../services/api";
-
-const isEmptyObject = (obj) => {
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      return false;
-    }
-  }
-  return true;
-};
+import { isEmptyObject } from "helper/common";
 
 function* getDataSaga() {
   try {

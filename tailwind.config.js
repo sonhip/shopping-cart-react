@@ -4,12 +4,14 @@ module.exports = {
   theme: {
     extend: {
       margin: {
-        "-156": "-156px",
+        "-180": "-180px",
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      visibility: ["hover", "focus", "group-hover"],
+    },
   },
   plugins: [],
 };

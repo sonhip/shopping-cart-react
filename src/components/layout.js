@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
-import HeaderComponent from "./header";
-import FooterComponent from "./footer";
+import HeaderComponent from "./header/header";
+import FooterComponent from "./footer/footer";
 import PropTypes from "prop-types";
 
 const { Content } = Layout;

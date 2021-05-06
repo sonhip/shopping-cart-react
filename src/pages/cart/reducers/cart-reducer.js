@@ -1,91 +1,93 @@
 import * as types from "../actions/types";
 
 const initialState = {
-  statusAdd: false,
-  cartItems: [],
-  sumMoney: 0,
-  countItems: 0,
+  loadingCart: false,
+  dataCart: [],
   errorCart: null,
+  totalMoney: 0,
+  countItems: 0,
 };
 
-export const CartReducer = (state = initialState, action) => {
-  const cloneState = JSON.parse(JSON.stringify(state)); //deep copy object
+const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.START_ADD_ITEM_TO_CART:
-      cloneState.statusAdd = action.status;
-      break;
+      return { ...state, loadingCart: action.loading };
     case types.STOP_ADD_ITEM_TO_CART:
-      cloneState.statusAdd = action.status;
-      break;
-    case types.ADD_ITEM_TO_CART_FAILED:
-      cloneState.errorCart = action.error;
-      break;
+      return { ...state, loadingCart: action.loading };
     case types.ADD_ITEM_TO_CART_SUCCESS:
-      const detailItem = action.data;
+      const infoPd = action.data;
       // empty cart
-      if (!cloneState.cartItems) {
-        detailItem.qty = 1; // add a field quantity for item
-        cloneState.cartItems = [...cloneState.cartItems, detailItem]; //detailItem;
-        cloneState.error = null;
-        cloneState.countItems += 1;
-        cloneState.sumMoney =
-          cloneState.sumMoney +
-          parseFloat(detailItem.price) * parseFloat(detailItem.qty);
+      if (!state.dataCart) {
+        infoPd.qty = 1; // add a field qty default is 1
+        return {
+          ...state,
+          dataCart: [...state.dataCart, infoPd],
+          errorCart: null,
+          totalMoney: parseInt(state.totalMoney) + parseInt(infoPd.price),
+          countItems: state.countItems + 1,
+        };
       } else {
-        // item was added in cart => add + 1 qty
-        const IdItem = detailItem.id;
-        const infoItem = cloneState.cartItems.filter(
-          (item) => item.id === IdItem
-        )[0];
-        if (infoItem) {
-          infoItem.qty += 1;
-          cloneState.errorCart = null;
-          cloneState.sumMoney =
-            cloneState.sumMoney + parseFloat(infoItem.price);
+        // item was added in cart, just change qty
+        const idPd = action.data.id;
+        const searchPd = state.dataCart.filter((item) => item.id === idPd)[0];
+        if (searchPd) {
+          searchPd.qty += 1;
+          return {
+            ...state,
+            errorCart: null,
+            totalMoney: parseInt(state.totalMoney) + parseInt(infoPd.price),
+          };
         } else {
-          // add new item and new qty
-          detailItem.qty = 1; // add a field quantity for item
-          cloneState.cartItems = [...cloneState.cartItems, detailItem];
-          cloneState.error = null;
-          cloneState.countItems += 1;
-          cloneState.sumMoney =
-            cloneState.sumMoney +
-            parseFloat(detailItem.price) * parseFloat(detailItem.qty);
+          infoPd.qty = 1; // item was added in cart, just change qty
+          return {
+            ...state,
+            dataCart: [...state.dataCart, infoPd],
+            errorCart: null,
+            totalMoney: parseInt(state.totalMoney) + parseInt(infoPd.price),
+            countItems: state.countItems + 1,
+          };
         }
       }
-      break;
-    case types.DELETE_ITEM_FROM_CART:
-      const idItemDelete = action.id;
-      const itemDelete = cloneState.cartItems.filter(
-        (item) => item.id === idItemDelete
-      )[0];
-      cloneState.cartItems = cloneState.cartItems.filter(
-        (item) => item.id !== idItemDelete
-      );
-
-      cloneState.countItems -= 1;
-      cloneState.error = null;
-      cloneState.sumMoney =
-        cloneState.sumMoney - parseFloat(itemDelete.price * itemDelete.qty);
-
-      break;
+    case types.ADD_ITEM_TO_CART_FAILED:
+      return {
+        ...state,
+        errorCart: action.error,
+      };
     case types.CHANGE_QTY_ITEM:
-      const idChange = action.id;
-      const qtyChange = action.qty;
+      const idCart = action.id;
+      let qtyCart = action.qty;
+      qtyCart = qtyCart === null || qtyCart === "" ? 1 : qtyCart;
 
-      const itemChange = cloneState.cartItems.filter(
-        (item) => item.id === idChange
-      )[0];
-      itemChange.qty = qtyChange;
-      const totalMoney = cloneState.cartItems
-        .map((item) => parseFloat(item.qty * item.price))
-        .reduce((a, b) => a + b);
-      cloneState.sumMoney = totalMoney;
-      cloneState.error = null;
-      break;
+      // update qty cart
+      const newListCart = state.dataCart.map((item) => {
+        return item.id === idCart ? { ...item, qty: qtyCart } : item;
+      });
+      //update total money and calculate
+      const newTotalMoney = newListCart
+        .map((item) => parseInt(item.price) * parseInt(item.qty))
+        .reduce((pre, next) => pre + next);
+
+      return {
+        ...state,
+        errorCart: null,
+        dataCart: newListCart,
+        totalMoney: newTotalMoney,
+      };
+    case types.DELETE_ITEM_FROM_CART:
+      const idItemDel = action.id;
+      const delItem = state.dataCart.filter((item) => item.id === idItemDel)[0];
+      const newsItems = state.dataCart.filter((item) => item.id !== idItemDel);
+      const newsTotalMoney =
+        state.totalMoney - parseInt(delItem.price) * delItem.qty;
+      return {
+        ...state,
+        dataCart: newsItems,
+        totalMoney: newsTotalMoney,
+        errorCart: null,
+        countItems: state.countItems - 1,
+      };
     default:
-      break;
+      return state;
   }
-  return cloneState;
 };
 export default CartReducer;

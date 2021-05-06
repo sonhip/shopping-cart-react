@@ -8,7 +8,7 @@ import { changeQtyItem } from "../../actions/index";
 
 function ListItemsCart() {
   const dispatch = useDispatch();
-  const { dataCart, sumMoney, countItem } = useSelector(
+  const { dataCart, sumMoney } = useSelector(
     createStructuredSelector({
       dataCart: reselect.dataCartItemsSelector,
       sumMoney: reselect.sumMoneySelector,
@@ -39,6 +39,7 @@ function ListItemsCart() {
                   <p>Money: {(item.price * item.qty).toLocaleString()}</p>
                   <InputNumber
                     min={1}
+                    max={10}
                     defaultValue={item.qty}
                     onChange={(val) => handleChangeQty(item.id, val)}
                   />

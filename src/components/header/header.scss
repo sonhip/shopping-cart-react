@@ -1,0 +1,10 @@
+.bridge::before {
+    display: block;
+    content: "";
+    width: 114px;
+    height: 100px;
+    background: transparent;
+    position: absolute;
+    top: -20px;
+    left: 80px;
+}

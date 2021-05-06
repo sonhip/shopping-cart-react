@@ -4,11 +4,11 @@ const cartSelector = (state) => state.cartReducer;
 
 export const dataCartItemsSelector = createSelector(
   cartSelector,
-  (item) => item.cartItems
+  (item) => item.dataCart
 );
 export const sumMoneySelector = createSelector(
   cartSelector,
-  (item) => item.sumMoney
+  (item) => item.totalMoney
 );
 export const countItemsSelector = createSelector(
   cartSelector,
