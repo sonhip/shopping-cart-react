@@ -63,7 +63,7 @@ const HeaderComponent = () => {
         {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
         <div
           className={`md:flex items-center px-6 py-3 transition-all duration-700 relative z-0 md:mt-0 ${
-            isOpenMenu ? "mt-0" : "-mt-180"
+            isOpenMenu ? "mt-0" : "-mt-210"
           }`}
         >
           <div className="flex flex-col md:flex-row md:mx-6 ">
@@ -82,37 +82,20 @@ const HeaderComponent = () => {
             <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
               About
             </Link>
-            <div className="lg:hidden">
+            <div className="md:hidden">
               {data ? (
-                <div className="group">
+                <div className="group flex flex-col">
                   <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
-                    Your profile
+                    Settings
                   </Link>
-                  <div
-                    className=" bridge opacity-0 transform scale-95 duration-300 transition group-hover:transform group-hover:scale-95 invisible group-hover:opacity-100 group-hover:visible origin-top-right absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu-button"
-                    tabindex="-1"
-                  >
-                    <Link
-                      href="!#"
-                      className="block px-4 py-2 text-sm text-gray-700 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="user-menu-item-1"
-                    >
-                      Settings
-                    </Link>
 
-                    <Link
-                      to="/login"
-                      onClick={() => handleLogout()}
-                      className="block px-4 py-2 text-sm text-gray-700 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-                    >
-                      Logout
-                    </Link>
-                  </div>
+                  <Link
+                    to="/login"
+                    onClick={() => handleLogout()}
+                    className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                  >
+                    Logout
+                  </Link>
                 </div>
               ) : (
                 <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">

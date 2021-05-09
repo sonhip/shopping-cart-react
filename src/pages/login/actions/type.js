@@ -5,7 +5,7 @@ export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const START_LOGIN = "START_LOGIN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
-export const STOP_LOGIN = "START_LOGIN";
+export const STOP_LOGIN = "STOP_LOGIN";
 
 export const START_LOGOUT = "START_LOGOUT";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";

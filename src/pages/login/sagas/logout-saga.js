@@ -12,7 +12,7 @@ const success = () => {
   });
 };
 const failed = () => {
-  message.success({
+  message.warn({
     content: "Logout Failed!",
     className: "w-3/4 mt-16 md:text-xl",
   });

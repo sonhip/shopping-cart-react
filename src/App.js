@@ -16,6 +16,8 @@ const LoginPage = lazy(() =>
 const SignPage = lazy(() =>
   import("./pages/login/components/signup-page/form-signup")
 );
+const CheckoutPage = lazy(() => import("./pages/checkout/index"));
+const DetailPage = lazy(() => import("./pages/detail/detail"));
 
 const App = () => {
   useEffect(() => {
@@ -46,6 +48,12 @@ const App = () => {
               </Route>
               <Route exact path="/register">
                 <SignPage />
+              </Route>
+              <Route exact path="/checkout">
+                <CheckoutPage />
+              </Route>
+              <Route exact path="/detail/:slug">
+                <DetailPage />
               </Route>
             </Switch>
           </Suspense>

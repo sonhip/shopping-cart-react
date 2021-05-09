@@ -14,7 +14,7 @@ const success = () => {
   });
 };
 const failed = () => {
-  message.success({
+  message.warning({
     content: "Register Failed!",
     className: "w-3/4 mt-16 md:text-xl",
   });

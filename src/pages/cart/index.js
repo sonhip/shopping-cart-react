@@ -1,14 +1,15 @@
 import React from "react";
-import LayoutComponent from "components/layout";
+import HeaderComponent from "components/header/header";
 import ListItemsCart from "./components/list-cart/index";
 
 function CartPage(props) {
   return (
-    <div style={{ marginTop: 56 }}>
-      <LayoutComponent>
+    <>
+      <HeaderComponent />
+      <div className="container mx-auto mt-20">
         <ListItemsCart />
-      </LayoutComponent>
-    </div>
+      </div>
+    </>
   );
 }
 

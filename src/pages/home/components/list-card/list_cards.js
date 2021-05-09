@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { BsStarFill } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 import "./list_card.scss";
 import Loading from "components/loading/loading";
 import { useDispatch } from "react-redux";
 import * as actions from "pages/cart/actions/index";
 import { message } from "antd";
+import { Link } from "react-router-dom";
+import { Rate } from "antd";
 const ListCards = (props) => {
   const dispatch = useDispatch();
   const [like, setLike] = useState(false);
-
   //customize msg from antd
   const success = () => {
     message.success({
@@ -38,7 +38,12 @@ const ListCards = (props) => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
           {data.map((item) => {
             return (
-              <a class="home-product-item__wrap-link" href="!#" key={item.id}>
+              <Link
+                to={`detail/${item.id}`}
+                class="home-product-item__wrap-link"
+                href="!#"
+                key={item.id}
+              >
                 <div class="home-product-item">
                   <div
                     class="home-product-item__img"
@@ -51,6 +56,7 @@ const ListCards = (props) => {
                     <span class="home-product-item__price-old">1,200,000đ</span>
                     <span class="home-product-item__price-current">
                       {parseFloat(item.price).toLocaleString()}
+                      <span className="text-sm text-red-500">VND</span>
                     </span>
                   </div>
                   <div class="home-product-item__action">
@@ -67,11 +73,7 @@ const ListCards = (props) => {
                       />
                     </span>
                     <div class="home-product-item__rating">
-                      <BsStarFill className="home-product-item__star--gold fas fa-star" />
-                      <BsStarFill className="home-product-item__star--gold fas fa-star" />
-                      <BsStarFill className="home-product-item__star--gold fas fa-star" />
-                      <BsStarFill className="home-product-item__star--gold fas fa-star" />
-                      <BsStarFill className="fas fa-star" />
+                      <Rate disabled allowHalf defaultValue={4.5} />
                     </div>
                     <div class="home-product-item__sold">88 đã bán</div>
                   </div>
@@ -80,7 +82,7 @@ const ListCards = (props) => {
                       onClick={(e) => {
                         handleAddItemToCart(e, item.id);
                       }}
-                      class="home-product-item__brand text-white text-sm px-3 mb-2 py-1 bg-indigo-500 rounded hover:bg-indigo-700"
+                      class="home-product-item__brand focus:outline-none text-white text-sm px-3 mb-2 py-1 bg-indigo-500 rounded hover:bg-indigo-700"
                     >
                       Add to cart
                     </button>
@@ -95,7 +97,7 @@ const ListCards = (props) => {
                     <span class="home-product-item__sale-off-label">GIẢM</span>
                   </div>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>
