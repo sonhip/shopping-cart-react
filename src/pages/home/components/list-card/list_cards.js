@@ -35,12 +35,12 @@ const ListCards = (props) => {
   return (
     <>
       {data.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {data.map((item) => {
             return (
               <Link
                 to={`detail/${item.id}`}
-                class="home-product-item__wrap-link"
+                class="home-product-item__wrap-link sm:p-2"
                 href="!#"
                 key={item.id}
               >
@@ -51,10 +51,14 @@ const ListCards = (props) => {
                       backgroundImage: `url(${item.image})`,
                     }}
                   ></div>
-                  <h4 class="home-product-item__name">{item.name}</h4>
-                  <div class="home-product-item__price">
-                    <span class="home-product-item__price-old">1,200,000đ</span>
-                    <span class="home-product-item__price-current">
+                  <h4 class="home-product-item__name text-xl text-center font-medium">
+                    {item.name}
+                  </h4>
+                  <div class="home-product-item__price mt-0">
+                    <span class="home-product-item__price-old text-md sm:text-xl font-medium ">
+                      1,200,000đ
+                    </span>
+                    <span class="home-product-item__price-current text-xl sm:text-2xl text-black">
                       {parseFloat(item.price).toLocaleString()}
                       <span className="text-sm text-red-500">VND</span>
                     </span>
@@ -69,13 +73,12 @@ const ListCards = (props) => {
                           like
                             ? "home-product-item__like-icon-fill"
                             : "home-product-item__like-icon-empty"
-                        } far fa-heart`}
+                        } far fa-heart mt-2`}
                       />
                     </span>
                     <div class="home-product-item__rating">
                       <Rate disabled allowHalf defaultValue={4.5} />
                     </div>
-                    <div class="home-product-item__sold">88 đã bán</div>
                   </div>
                   <div class="home-product-item__origin">
                     <button
@@ -86,7 +89,6 @@ const ListCards = (props) => {
                     >
                       Add to cart
                     </button>
-                    <span class="home-product-item__origin-name">Nhật Bản</span>
                   </div>
                   <div class="home-product-item_favourite">
                     <i class="fas fa-check"></i>

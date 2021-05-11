@@ -1,26 +1,15 @@
 import React from "react";
 import ListCards from "../list-card/list_cards";
-import * as reselect from "../../reselect/products_reselect";
-import { createStructuredSelector } from "reselect";
-import { useSelector, useDispatch } from "react-redux";
-import { push } from "connected-react-router";
 
-const AllProducts = () => {
-  const dispatch = useDispatch();
-  const { loading, data } = useSelector(
-    createStructuredSelector({
-      loading: reselect.loadingSelector,
-      data: reselect.getDataProducts,
-    })
-  );
+const AllProducts = (props) => {
+  const { data, loading } = props;
 
   return (
     <>
-      <div className="mx-auto my-8">
-        <h2>Feature Products</h2>
-        <button onClick={() => dispatch(push("/cart"))}>Link</button>
+      <div className="sm:bg-indigo-200 sm:p-8 mt-16 rounded">
+        <h2 className="text-xl font-bold text-center ">All products</h2>
+        <ListCards loading={loading} data={data} />
       </div>
-      <ListCards loading={loading} data={data} />
     </>
   );
 };

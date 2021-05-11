@@ -22,7 +22,7 @@ function Rating(props) {
   };
   return (
     <div>
-      <div className="mt-2 border-t-2 bg-red-300 p-8 border-brown-300">
+      <div className="mt-2 border-t-2 bg-indigo-200 p-8 border-brown-300">
         <h1 className="text-center text-xl sm:text-3xl">Rating and feedback</h1>
         <div className="flex flex-col items-center">
           <div className="text-center">

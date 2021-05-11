@@ -13,7 +13,7 @@ const LayoutComponent = (props) => {
     <>
       <HeaderComponent />
       <Content>
-        <div className="bg-white min-h-screen container mx-auto">
+        <div className="bg-white min-h-screen container mx-auto px-4 sm:px-8">
           {children}
         </div>
       </Content>

@@ -14,19 +14,6 @@ export const getDataProductById = async (id = 0) => {
   const data = (await response.status) === 200 ? response.data : {};
   return data;
 };
-// export const addNewRating = async (star, cmt, id) => {
-//   const rating = {
-//     rating: [
-//       {
-//         stars: star,
-//         comments: cmt,
-//       },
-//     ],
-//   };
-//   const url = `http://localhost:8000/api/products/${id}`;
-//   const dataUpdate = await axios.patch(url, rating);
-//   return dataUpdate;
-// };
 
 export const addNewRating = async (data, id) => {
   const url = `http://localhost:8000/api/products/${id}`;

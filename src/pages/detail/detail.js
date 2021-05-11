@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "components/header/header";
 import { useLocation } from "react-router-dom";
-import { Rate, Card, Input, message } from "antd";
+import { Card, message } from "antd";
 import * as api from "services/api";
+import HeaderComponent from "components/header/header";
+import UserRating from "./userRating";
 import Loading from "components/loading/loading";
 import Rating from "./rating";
 import { isEmptyObject } from "helper/common";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "pages/cart/actions/index";
 
-const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 const { Meta } = Card;
-const { TextArea } = Input;
 
 const DetailProduct = () => {
   const [dataDetail, setDataDetail] = useState({});
@@ -138,42 +137,14 @@ const DetailProduct = () => {
           </div>
 
           <div>
-            <div className="mt-16">
-              <div className="flex items-center mb-2">
-                <div className="w-8 h-8 bg-indigo-500 rounded-full"></div>
-                <div className="text-xl font-md ml-2">Users</div>
-              </div>
-              <div>
-                <span>
-                  <Rate
-                    tooltips={desc}
-                    onChange={(val) => handleChange(val)}
-                    onClick={(val) => handleChange(val)}
-                    value={star}
-                  />
-                  {star ? (
-                    <span className="ant-rate-text">{desc[star - 1]}</span>
-                  ) : (
-                    ""
-                  )}
-                </span>
-              </div>
-              <div>
-                <TextArea
-                  showCount
-                  maxLength={100}
-                  onChange={(e) => onChangeTextComment(e)}
-                  value={comment}
-                />
-                <button
-                  className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded mt-2 focus:outline-none"
-                  type="submit"
-                  onClick={(e) => handleRating(e, dataDetail.id)}
-                >
-                  Send
-                </button>
-              </div>
-            </div>
+            <UserRating
+              star={star}
+              handleChange={handleChange}
+              onChangeTextComment={onChangeTextComment}
+              handleRating={handleRating}
+              comment={comment}
+              dataDetail={dataDetail}
+            />
             <Rating dataDetail={dataDetail} hardStar={hardStar} />
           </div>
         </div>
