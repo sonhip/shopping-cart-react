@@ -1,7 +1,7 @@
 import { put, call, takeLatest } from "redux-saga/effects";
 import * as actions from "../actions/index";
 import * as types from "../actions/types";
-import * as api from "../../../services/api";
+import * as api from "services/api";
 import { isEmptyObject } from "helper/common";
 
 function* getDataSaga() {

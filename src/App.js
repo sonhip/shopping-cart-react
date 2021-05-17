@@ -18,6 +18,8 @@ const SignPage = lazy(() =>
 );
 const CheckoutPage = lazy(() => import("./pages/checkout/index"));
 const DetailPage = lazy(() => import("./pages/detail/detail"));
+const SearchPage = lazy(() => import("./pages/search/index"));
+const ConfirmOrderPage = lazy(() => import("./pages/confirmOrder/index"));
 
 const App = () => {
   useEffect(() => {
@@ -54,6 +56,12 @@ const App = () => {
               </Route>
               <Route exact path="/detail/:slug">
                 <DetailPage />
+              </Route>
+              <Route exact path="/search/:slug">
+                <SearchPage />
+              </Route>
+              <Route exact path="/confirm">
+                <ConfirmOrderPage />
               </Route>
             </Switch>
           </Suspense>

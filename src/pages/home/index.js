@@ -16,8 +16,10 @@ const HomePage = () => {
   const data = useSelector((state) => state.productsReducer.dataProducts);
   const loading = useSelector((state) => state.productsReducer.loadingProducts);
   const [newDataPerPage, setNewDataPerPage] = useState([]);
+  const [dataPagination, setDataPagination] = useState([]);
   useEffect(() => {
     handleChangePage(1);
+    setDataPagination(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
@@ -36,14 +38,15 @@ const HomePage = () => {
   const handleChangePage = (page) => {
     setNewDataPerPage(dataPerPage[page - 1]);
     setCurrentPage(page);
+    window.scrollTo(0, 0);
   };
   const dataLatestProducts = data.filter((item) => item.kind === "latest");
   const dataTopSellingProducts = data.filter(
     (item) => item.kind === "topselling"
   );
   return (
-    <>
-      <div style={{ marginTop: 56 }}>
+    <div>
+      <div className="hidden sm:block" style={{ marginTop: 56 }}>
         <Carousel />
       </div>
       <LayoutComponent>
@@ -72,9 +75,10 @@ const HomePage = () => {
         <Pagination
           getCurrentPage={handleChangePage}
           currentPage={currentPage}
+          data={dataPagination}
         />
       </LayoutComponent>
-    </>
+    </div>
   );
 };
 

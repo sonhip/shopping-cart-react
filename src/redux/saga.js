@@ -4,6 +4,7 @@ import watchAddCartSaga from "../pages/cart/sagas/cart-saga";
 import watchLoginSaga from "../pages/login/sagas/login-saga";
 import watchLogoutSaga from "../pages/login/sagas/logout-saga";
 import watchRegisterSaga from "../pages/login/sagas/register-saga";
+import watchSearchingDataSaga from "pages/search/saga/saga-searching";
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     call(watchLoginSaga),
     call(watchLogoutSaga),
     call(watchRegisterSaga),
+    call(watchSearchingDataSaga),
   ]);
 }

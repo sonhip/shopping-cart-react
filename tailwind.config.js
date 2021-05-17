@@ -6,6 +6,9 @@ module.exports = {
       margin: {
         "-210": "-210px",
       },
+      backgroundColor: {
+        "bg-content": "#f5f5f5",
+      },
     },
   },
   variants: {

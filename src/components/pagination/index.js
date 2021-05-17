@@ -1,10 +1,8 @@
 import React from "react";
 import { Pagination } from "antd";
-import { useSelector } from "react-redux";
 
 function PaginationComponent(props) {
-  const { getCurrentPage, currentPage } = props;
-  const data = useSelector((state) => state.productsReducer.dataProducts);
+  const { getCurrentPage, currentPage, data } = props;
 
   return (
     <div className="flex justify-center m-8">

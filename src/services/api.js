@@ -21,6 +21,27 @@ export const addNewRating = async (data, id) => {
   return dataUpdate;
 };
 
+export const searchByName = async (name) => {
+  const url = `http://localhost:8000/api/products?name_like=${name}`;
+  const response = await axios.get(url);
+  const data = (await response.status) === 200 ? response.data : [];
+  return data;
+};
+
+// export const searchByFilter = async (
+//   name = "",
+//   type = "",
+//   category = "",
+//   priceFrom = "",
+//   priceTo = "",
+//   sort = ""
+// ) => {
+//   const url = `http://localhost:8000/api/products?name_like=${name}&type=${type}&kind=${category}&price_gte=${priceFrom}&price_lte=${priceTo}&_sort=price&_order=${sort}`;
+//   const response = await axios.get(url);
+//   const data = (await response.status) === 200 ? response.data : {};
+//   return data;
+// };
+
 // =================fake api=================
 // import data from "./data-v1";
 // import dataPd from "./data";

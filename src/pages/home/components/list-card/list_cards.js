@@ -7,6 +7,8 @@ import * as actions from "pages/cart/actions/index";
 import { message } from "antd";
 import { Link } from "react-router-dom";
 import { Rate } from "antd";
+import { push } from "connected-react-router";
+
 const ListCards = (props) => {
   const dispatch = useDispatch();
   const [like, setLike] = useState(false);
@@ -20,6 +22,7 @@ const ListCards = (props) => {
 
   const handleAddItemToCart = (e, id) => {
     e.preventDefault();
+    e.stopPropagation();
     dispatch(actions.addItemToCart(id));
     success();
   };
@@ -32,6 +35,10 @@ const ListCards = (props) => {
   if (loading) {
     return <Loading />;
   }
+  const gotoDetailPage = (id) => {
+    dispatch(push(`/detail/${id}`));
+    // to={`detail/${item.id}`}
+  };
   return (
     <>
       {data.length > 0 ? (
@@ -39,7 +46,7 @@ const ListCards = (props) => {
           {data.map((item) => {
             return (
               <Link
-                to={`detail/${item.id}`}
+                onClick={() => gotoDetailPage(item.id)}
                 class="home-product-item__wrap-link sm:p-2"
                 href="!#"
                 key={item.id}

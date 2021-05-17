@@ -16,7 +16,7 @@ const Auto = (props) => {
         style={{
           ...style,
           display: "block",
-          zIndex: "50",
+          zIndex: "1",
           height: "33px",
           width: "33px",
           right: "0%",
@@ -34,7 +34,7 @@ const Auto = (props) => {
         style={{
           ...style,
           display: "block",
-          zIndex: "50",
+          zIndex: "1",
           height: "33px",
           width: "33px",
           left: "0%",

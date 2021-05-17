@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as reselectCart from "pages/cart/reselect/cart-reselect";
 import * as reselectLogin from "pages/login/reselect/login-reselect";
 import { createStructuredSelector } from "reselect";
-import { useDispatch } from "react-redux";
 import { logoutRequest } from "../../pages/login/actions/index";
+import { searchingData } from "pages/search/actions/index";
+import { Input } from "antd";
 import "./header.scss";
+import { push } from "connected-react-router";
 
+const { Search } = Input;
 const HeaderComponent = () => {
   const dispatch = useDispatch();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -28,20 +31,41 @@ const HeaderComponent = () => {
   const handleShowMenu = () => {
     setIsOpenMenu(!isOpenMenu);
   };
+  const directToSearchPage = (value) => {
+    if (value !== "") {
+      dispatch(push(`/search/keyword=${value}`));
+      dispatch(searchingData(value));
+    }
+  };
   return (
     // <!-- component -->
-    <nav className="bg-white shadow fixed z-10 top-0 right-0 left-0">
+    <nav className="bg-purple-300 h-auto sm:bg-indigo-200 shadow fixed z-10 top-0 right-0 left-0">
       <div className="container mx-auto md:flex md:justify-between md:items-center">
-        <div className="flex justify-between relative z-10 items-center px-6 py-3 bg-white">
-          <div>
-            <Link
-              className="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
-              to="/home"
-            >
+        <Link
+          to="/home"
+          className="flex flex-row-reverse justify-between relative z-10 items-center px-6 py-3 sm:rounded h-full bg-purple-300 border-b-2"
+        >
+          <div className="hidden sm:block">
+            <div className="text-gray-800 text-xl font-medium md:text-2xl hover:text-indigo-500">
               FOODS & DRINKS
-            </Link>
+            </div>
           </div>
-
+          <div></div>
+          <div
+            className={`${
+              isOpenMenu ? "invisible sr-only opacity-0" : "visible opacity-100"
+            } transition-all duration-700 ease-in-out px-4 sm:hidden`}
+          >
+            <Search
+              className=""
+              maxLength={30}
+              placeholder="Search name products..."
+              allowClear
+              onSearch={(value) => directToSearchPage(value)}
+              enterButton
+              size={"large"}
+            />
+          </div>
           {/* <!-- Mobile menu button --> */}
           <div className="flex md:hidden">
             <button
@@ -50,7 +74,7 @@ const HeaderComponent = () => {
               className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
               aria-label="toggle menu"
             >
-              <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
+              <svg viewBox="0 0 24 24" className="h-8 w-8 fill-current">
                 <path
                   fillRule="evenodd"
                   d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
@@ -58,7 +82,7 @@ const HeaderComponent = () => {
               </svg>
             </button>
           </div>
-        </div>
+        </Link>
 
         {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
         <div
@@ -69,36 +93,36 @@ const HeaderComponent = () => {
           <div className="flex flex-col md:flex-row md:mx-6 ">
             <Link
               to="/home"
-              className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+              className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
             >
               Home
             </Link>
-            <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
-              Shop
-            </Link>
-            <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+            <Link className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
               Contact
             </Link>
-            <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+            <Link className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
               About
             </Link>
             <div className="md:hidden">
               {data ? (
                 <div className="group flex flex-col">
-                  <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+                  <Link className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
                     Settings
                   </Link>
 
                   <Link
                     to="/login"
                     onClick={() => handleLogout()}
-                    className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                    className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
                   >
                     Logout
                   </Link>
                 </div>
               ) : (
-                <Link className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+                <Link
+                  to="/login"
+                  className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                >
                   Login
                 </Link>
               )}
@@ -108,7 +132,7 @@ const HeaderComponent = () => {
           <div className="flex justify-center md:block">
             <Link
               to="/cart"
-              className="relative text-gray-700 hover:text-gray-600"
+              className="relative text-gray-800 hover:text-gray-600"
             >
               <svg
                 className="h-5 w-5"
@@ -146,7 +170,7 @@ const HeaderComponent = () => {
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />
-                      <div className="text-sm invisible lg:visible text-gray-700 font-medium ml-2 hover:text-indigo-500">
+                      <div className="text-sm invisible lg:visible text-gray-800 font-medium ml-2 hover:text-indigo-500">
                         Hi, {data.user.userName}
                       </div>
                     </div>
@@ -162,7 +186,7 @@ const HeaderComponent = () => {
                 >
                   <Link
                     href="!#"
-                    className="block px-4 py-2 text-sm text-gray-700 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                    className="block px-4 py-2 text-sm text-gray-800 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-1"
@@ -173,7 +197,7 @@ const HeaderComponent = () => {
                   <Link
                     to="/login"
                     onClick={() => handleLogout()}
-                    className="block px-4 py-2 text-sm text-gray-700 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                    className="block px-4 py-2 text-sm text-gray-800 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
                   >
                     Logout
                   </Link>
@@ -182,11 +206,21 @@ const HeaderComponent = () => {
             ) : (
               <Link
                 to="/login"
-                className="block px-4 py-2 text-sm text-gray-700 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                className="block px-4 py-2 text-sm text-gray-800 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
               >
                 Login
               </Link>
             )}
+          </div>
+          <div className="hidden sm:block sm:ml-32">
+            <Search
+              maxLength={30}
+              placeholder="Search name products..."
+              allowClear
+              onSearch={(value) => directToSearchPage(value)}
+              enterButton
+              size={"large"}
+            />
           </div>
         </div>
       </div>
