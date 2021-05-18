@@ -14,7 +14,6 @@ function* addCartSaga({ id }) {
   try {
     yield put(actions.startAddItemToCart(true));
     const res = yield call(api.getDataProductById, id);
-    console.log(res);
     if (res) {
       yield put(actions.addItemToCartSuccess(res[0]));
     } else {

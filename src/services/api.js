@@ -27,6 +27,15 @@ export const searchByName = async (name) => {
   const data = (await response.status) === 200 ? response.data : [];
   return data;
 };
+export const updateDataConfirm = (data) => {
+  data.forEach(async (item) => {
+    const url = `http://localhost:8000/api/products/${item.id}`;
+    await axios.patch(url, {
+      quantity: item.quantity - item.qty,
+      order: item.order + 1,
+    });
+  });
+};
 
 // export const searchByFilter = async (
 //   name = "",

@@ -27,6 +27,7 @@ const ListCards = (props) => {
     success();
   };
   const handleLike = (e) => {
+    e.stopPropagation();
     e.preventDefault();
     setLike(!like);
   };

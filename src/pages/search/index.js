@@ -15,35 +15,21 @@ const SearchPage = () => {
     // eslint-disable-next-line
   }, [loading]);
 
-  const handleChange = (
-    type = "",
-    category = "",
-    from = "",
-    to = "",
-    sort = ""
-  ) => {
-    console.log(type, category, from, to, sort);
+  const handleChange = (type, category, sort) => {
     let dataFilter = data;
-    if (
-      type !== "" ||
-      category !== "" ||
-      from !== "" ||
-      to !== "" ||
-      sort !== ""
-    ) {
-      if (type !== "") {
-        dataFilter = data.filter((item) => item.type === type);
-      }
-      if (category !== "") {
-        dataFilter = data.filter((item) => item.kind === category);
-      }
-      if (sort === "ascending") {
-        dataFilter = data.sort((a, b) => a.price - b.price);
-      }
-      if (sort === "descending") {
-        dataFilter = data.sort((a, b) => b.price - a.price);
-      }
+    if (type !== "all") {
+      dataFilter = data.filter((item) => item.type === type);
     }
+    if (category !== "all") {
+      dataFilter = data.filter((item) => item.kind === category);
+    }
+    if (sort === "ascending") {
+      dataFilter = [...dataFilter].sort((a, b) => a.price - b.price);
+    }
+    if (sort === "descending") {
+      dataFilter = [...dataFilter].sort((a, b) => b.price - a.price);
+    }
+    // }
     setFilter(dataFilter);
   };
   const { slug } = useParams();
@@ -72,8 +58,10 @@ const SearchPage = () => {
           </div>
         ) : (
           <div>
-            Sorry, there's no result about{" "}
-            <span className="text-red-500">{keyword}</span>
+            <div>
+              <FilterComponent handleChange={handleChange} />
+            </div>
+            <div>Sorry, there's no result! </div>
           </div>
         )}
       </div>

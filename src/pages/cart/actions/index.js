@@ -34,3 +34,13 @@ export const changeQtyItem = (id, qty) => ({
   id,
   qty,
 });
+
+export const submitToPayment = (data) => ({
+  type: types.SUBMIT_TO_PAYMENT,
+  data,
+});
+
+//confirm order
+export const confirmOrder = () => ({
+  type: types.CONFIRM_ORDER,
+});

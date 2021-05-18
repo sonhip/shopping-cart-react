@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Select, Input, Button } from "antd";
+import { Select, Button } from "antd";
 const { Option } = Select;
 function FilterComponent(props) {
   const { handleChange } = props;
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [sort, setSort] = useState("");
+  const [type, setType] = useState("all");
+  const [category, setCategory] = useState("all");
+
+  const [sort, setSort] = useState("default");
 
   return (
     <div>
@@ -18,7 +17,7 @@ function FilterComponent(props) {
           </label>
           <Select
             id="type"
-            defaultValue="All"
+            defaultValue="all"
             style={{ width: 120 }}
             onChange={(value) => setType(value)}
           >
@@ -33,7 +32,7 @@ function FilterComponent(props) {
           </label>
           <Select
             id="category"
-            defaultValue="All"
+            defaultValue="all"
             style={{ width: 120 }}
             onChange={(value) => setCategory(value)}
           >
@@ -42,46 +41,27 @@ function FilterComponent(props) {
             <Option value="topSelling">Top Selling</Option>
           </Select>
         </div>
-        <div className="flex items-end">
-          <label className="text-lg font-medium mr-2" htmlFor="priceFrom">
-            From:
-          </label>
-          <Input
-            onChange={(e) => setFrom(e.target.value)}
-            style={{ width: "40%" }}
-            id="priceFrom"
-          />
-        </div>
-        <div className="flex items-end">
-          <label className="text-lg font-medium mr-2" htmlFor="priceTo">
-            To:
-          </label>
-          <Input
-            onChange={(e) => setTo(e.target.value)}
-            style={{ width: "40%" }}
-            id="priceTo"
-          />
-        </div>
         <div className="flex items-end mr-12">
           <label htmlFor="sort" className="text-lg font-medium mr-2">
             Sort:{" "}
           </label>
           <Select
             id="sort"
-            defaultValue="Ascending"
+            defaultValue="default"
             style={{ width: 120 }}
             onChange={(value) => setSort(value)}
           >
+            <Option value="default">Default</Option>
             <Option value="ascending">Ascending</Option>
             <Option value="descending">Descending</Option>
           </Select>
         </div>
         <div className="flex items-center">
           <Button
-            onClick={() => handleChange(type, category, from, to, sort)}
+            onClick={() => handleChange(type, category, sort)}
             type="primary"
           >
-            Search
+            Filter
           </Button>
         </div>
       </div>

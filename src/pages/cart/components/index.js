@@ -9,13 +9,13 @@ import { changeQtyItem } from "../actions/index";
 
 function CartPage(props) {
   const dispatch = useDispatch();
-  const { dataCart, sumMoney } = useSelector(
+  const { dataCart, isSubmit } = useSelector(
     createStructuredSelector({
       dataCart: reselect.dataCartItemsSelector,
-      sumMoney: reselect.sumMoneySelector,
-      countItem: reselect.countItemsSelector,
+      isSubmit: reselect.isSubmitSelector,
     })
   );
+  const totalMoney = isSubmit.reduce((a, b) => a + b.price * b.qty, 0);
   const handleDeleteItem = (id) => {
     dispatch(deleteItemFromCart(id));
   };
@@ -29,7 +29,7 @@ function CartPage(props) {
         handleDeleteItem={handleDeleteItem}
         handleChangeQty={handleChangeQty}
       />
-      <FooterCart sumMoney={sumMoney} />
+      <FooterCart sumMoney={totalMoney} />
     </div>
   );
 }

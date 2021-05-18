@@ -9,6 +9,7 @@ import Rating from "./rating";
 import { isEmptyObject } from "helper/common";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "pages/cart/actions/index";
+import { push } from "connected-react-router";
 
 const { Meta } = Card;
 
@@ -62,6 +63,11 @@ const DetailProduct = () => {
     e.preventDefault();
     dispatch(addItemToCart(id));
     success();
+  };
+  const handleAddAndDirectPage = (e, id) => {
+    e.preventDefault();
+    dispatch(addItemToCart(id));
+    dispatch(push("/checkout"));
   };
 
   const handleChange = (value) => {
@@ -129,7 +135,10 @@ const DetailProduct = () => {
                 >
                   Add to cart
                 </button>
-                <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded mt-2 focus:outline-none">
+                <button
+                  onClick={(e) => handleAddAndDirectPage(e, dataDetail.id)}
+                  className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded mt-2 focus:outline-none"
+                >
                   Buy now
                 </button>
               </div>

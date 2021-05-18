@@ -4,15 +4,18 @@ import * as reselect from "pages/cart/reselect/cart-reselect";
 import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { push } from "connected-react-router";
+import { confirmOrder } from "pages/cart/actions/index";
+import { updateDataConfirm } from "services/api";
 
 const { TextArea } = Input;
 
 function Confirm() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(null);
   const [delivery, setDelivery] = useState("GHN");
   const [note, setNote] = useState("");
+  const [error, setError] = useState(false);
 
   const checkPhoneNumber = () => {
     const arrPhoneNumber = phoneNumber.split("");
@@ -20,10 +23,17 @@ function Confirm() {
     for (let i of arrPhoneNumber) {
       if (isNaN(i) || arrPhoneNumber.length > 11) return false;
     }
+
     return true;
   };
   const checkSubmit = () => {
-    if (name !== "" && checkPhoneNumber() && address !== "") {
+    if (
+      name &&
+      address &&
+      delivery &&
+      checkPhoneNumber() &&
+      phoneNumber.length > 0
+    ) {
       return true;
     }
     return false;
@@ -31,19 +41,22 @@ function Confirm() {
   const handleSubmit = (e) => {
     if (checkSubmit()) {
       console.log(name, phoneNumber, address, delivery, note);
+      updateDataConfirm(isSubmit);
+      dispatch(confirmOrder());
       dispatch(push("/confirm"));
     } else {
+      setError(true);
       e.preventDefault();
     }
   };
 
-  const { dataCart, sumMoney } = useSelector(
+  const { dataCart, isSubmit } = useSelector(
     createStructuredSelector({
       dataCart: reselect.dataCartItemsSelector,
-      sumMoney: reselect.sumMoneySelector,
-      countItem: reselect.countItemsSelector,
+      isSubmit: reselect.isSubmitSelector,
     })
   );
+  const sumMoney = isSubmit.reduce((a, b) => a + b.price * b.qty, 0);
   const dispatch = useDispatch();
   if (dataCart.length === 0) {
     dispatch(push("/"));
@@ -53,12 +66,13 @@ function Confirm() {
     <>
       <div className="flex sm:flex-row flex-col ">
         <div className="flex-1">
-          {dataCart.length > 0 && (
+          {isSubmit.length > 0 && (
             <>
-              {dataCart.map((item) => (
+              {isSubmit.map((item) => (
                 <div className="p-4 m-4 flex items-center" id={item.id}>
-                  <Image width={300} src={item.image} />
+                  <Image width={200} src={item.image} />
                   <div className="ml-4">
+                    <h2 className="font-medium text-md">{item.name}</h2>
                     <h2 className="font-medium text-md">
                       Price:{" "}
                       <span className="text-xl">
@@ -66,7 +80,6 @@ function Confirm() {
                       </span>{" "}
                       <span className="text-sm text-red-500">VND</span>
                     </h2>
-
                     <h2 className="font-medium text-md">
                       Quantity:
                       <span className="text-xl">{item.qty}</span>{" "}
@@ -82,6 +95,11 @@ function Confirm() {
           <h2 className="pt-4 block text-xl text-center font-bold">
             Confirm Your Information
           </h2>
+          {error && (
+            <h1 className="text-sm text-center border-red-700 text-red-700 border-2 bg-red-100 py-2">
+              Please fill all field!!!
+            </h1>
+          )}
           <Form
             labelCol={{
               span: 24,
@@ -97,11 +115,6 @@ function Confirm() {
           >
             <Form.Item className="h-24" label="Your name">
               <Input onChange={(e) => setName(e.target.value)} />
-              {checkSubmit() ? (
-                <p className="text-sm text-red-500">
-                  Please fill your name before you submit!
-                </p>
-              ) : null}
             </Form.Item>
             <Form.Item className="h-24" label="Your phone number">
               <Input onChange={(e) => setPhoneNumber(e.target.value)} />
@@ -113,11 +126,6 @@ function Confirm() {
             </Form.Item>
             <Form.Item className="h-24" label="Your address">
               <Input onChange={(e) => setAddress(e.target.value)} />
-              {checkSubmit() ? (
-                <p className="text-sm text-red-500">
-                  Please fill your address before you submit!
-                </p>
-              ) : null}
             </Form.Item>
             <Form.Item className="h-24" label="Delivery">
               <Select
@@ -132,11 +140,6 @@ function Confirm() {
                   Giao Hàng Không Chậm (GHKC)
                 </Select.Option>
               </Select>
-              {checkSubmit() ? (
-                <p className="text-sm text-red-500">
-                  Please choose one service before you submit!
-                </p>
-              ) : null}
             </Form.Item>
             <Form.Item className="h-24" label="Note">
               <TextArea onChange={(e) => setNote(e.target.value)} rows={3} />

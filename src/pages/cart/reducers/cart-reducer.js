@@ -6,6 +6,7 @@ const initialState = {
   errorCart: null,
   totalMoney: 0,
   countItems: 0,
+  isSubmit: [],
 };
 
 const CartReducer = (state = initialState, action) => {
@@ -16,12 +17,14 @@ const CartReducer = (state = initialState, action) => {
       return { ...state, loadingCart: action.loading };
     case types.ADD_ITEM_TO_CART_SUCCESS:
       const infoPd = action.data;
+
       // empty cart
       if (!state.dataCart) {
         infoPd.qty = 1; // add a field qty default is 1
         return {
           ...state,
           dataCart: [...state.dataCart, infoPd],
+          isSubmit: [...state.isSubmit, infoPd],
           errorCart: null,
           totalMoney: parseInt(state.totalMoney) + parseInt(infoPd.price),
           countItems: state.countItems + 1,
@@ -42,6 +45,7 @@ const CartReducer = (state = initialState, action) => {
           return {
             ...state,
             dataCart: [...state.dataCart, infoPd],
+            isSubmit: [...state.isSubmit, infoPd],
             errorCart: null,
             totalMoney: parseInt(state.totalMoney) + parseInt(infoPd.price),
             countItems: state.countItems + 1,
@@ -62,6 +66,9 @@ const CartReducer = (state = initialState, action) => {
       const newListCart = state.dataCart.map((item) => {
         return item.id === idCart ? { ...item, qty: qtyCart } : item;
       });
+      const newSubmitCart = state.isSubmit.map((item) => {
+        return item.id === idCart ? { ...item, qty: qtyCart } : item;
+      });
       //update total money and calculate
       const newTotalMoney = newListCart
         .map((item) => parseInt(item.price) * parseInt(item.qty))
@@ -72,6 +79,7 @@ const CartReducer = (state = initialState, action) => {
         errorCart: null,
         dataCart: newListCart,
         totalMoney: newTotalMoney,
+        isSubmit: newSubmitCart,
       };
     case types.DELETE_ITEM_FROM_CART:
       const idItemDel = action.id;
@@ -82,9 +90,37 @@ const CartReducer = (state = initialState, action) => {
       return {
         ...state,
         dataCart: newsItems,
+        isSubmit: state.isSubmit.filter((item) => item.id !== idItemDel),
         totalMoney: newsTotalMoney,
         errorCart: null,
         countItems: state.countItems - 1,
+      };
+    case types.SUBMIT_TO_PAYMENT:
+      const itemSubmit = action.data;
+      const itemsSubmit = state.isSubmit.filter(
+        (item) => item.id === itemSubmit.id
+      )[0];
+      return {
+        ...state,
+        isSubmit: itemsSubmit
+          ? state.isSubmit.filter((item) => item.id !== itemSubmit.id)
+          : [...state.isSubmit, itemSubmit],
+      };
+
+    case types.CONFIRM_ORDER:
+      const newCartData = state.dataCart.filter((item) => {
+        for (let i = 0; i < state.isSubmit.length; i++) {
+          if (item.id === state.isSubmit[i].id) {
+            return false;
+          }
+        }
+        return true;
+      });
+      return {
+        ...state,
+        dataCart: newCartData,
+        countItems: newCartData.length,
+        isSubmit: [],
       };
     default:
       return state;

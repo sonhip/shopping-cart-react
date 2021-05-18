@@ -6,6 +6,11 @@ export const dataCartItemsSelector = createSelector(
   cartSelector,
   (item) => item.dataCart
 );
+
+export const isSubmitSelector = createSelector(
+  cartSelector,
+  (item) => item.isSubmit
+);
 export const sumMoneySelector = createSelector(
   cartSelector,
   (item) => item.totalMoney
