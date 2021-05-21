@@ -206,7 +206,7 @@ const HeaderComponent = () => {
             ) : (
               <Link
                 to="/login"
-                className="block px-4 py-2 text-sm text-black my-1  font-medium hover:text-main-light md:mx-4 md:my-0"
+                className="block px-4 py-2 text-sm text-white my-1  font-medium hover:text-main-light md:mx-4 md:my-0"
               >
                 Login
               </Link>

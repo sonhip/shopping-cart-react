@@ -28,9 +28,13 @@ axios.defaults.baseURL =
     : "http://localhost:8000";
 
 const App = () => {
+  const url =
+    process.env.NODE_ENV === "production"
+      ? "https://shopping-login-api.herokuapp.com/"
+      : "http://localhost:5000";
   useEffect(() => {
     (async function () {
-      const response = await axios.get("http://localhost:5000/api/auth/user", {
+      const response = await axios.get(`${url}/api/auth/user`, {
         withCredentials: true,
       });
       console.log(response);
