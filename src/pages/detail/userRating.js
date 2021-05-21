@@ -18,7 +18,7 @@ function UserRating(props) {
     <>
       <div className="mt-16">
         <div className="flex items-center mb-2">
-          <div className="w-8 h-8 bg-indigo-500 rounded-full"></div>
+          <div className="w-8 h-8 bg-main rounded-full"></div>
           <div className="text-xl font-md ml-2">Users</div>
         </div>
         <div>
@@ -44,7 +44,7 @@ function UserRating(props) {
             value={comment}
           />
           <button
-            className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded mt-2 focus:outline-none"
+            className="bg-main hover:bg-main-light text-white px-4 py-2 rounded mt-2 focus:outline-none"
             type="submit"
             onClick={(e) => handleRating(e, dataDetail.id)}
           >

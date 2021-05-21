@@ -55,9 +55,12 @@ const Carousel = () => {
         <Slider {...settings}>
           {data.map((item, index) => {
             return (
-              <div key={item.id} className="w-full focus:outline-none">
+              <div
+                key={item.id}
+                className="shadow-md w-full focus:outline-none"
+              >
                 <img
-                  className="w-full object-cover "
+                  className="w-full h-full object-cover "
                   src={item.imgSrc}
                   alt="fakeImages"
                 />

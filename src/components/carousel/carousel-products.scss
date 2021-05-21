@@ -6,3 +6,11 @@
     font-size: 35px;
     color: indigo;
 }
+.ant-card-cover {
+    height: 256px;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

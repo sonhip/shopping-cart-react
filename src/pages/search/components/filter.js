@@ -10,7 +10,7 @@ function FilterComponent(props) {
 
   return (
     <div>
-      <div className="sm:h-16 bg-purple-300 grid grid-cols-2 sm:flex sm:flex-row sm:items-center sm:px-16 p-4">
+      <div className="sm:h-16 bg-main-light bg-opacity-50 grid grid-cols-2 sm:flex sm:flex-row sm:items-center sm:px-16 p-4">
         <div className="flex items-end mr-6">
           <label htmlFor="type" className="text-lg font-medium mr-2">
             Type:{" "}

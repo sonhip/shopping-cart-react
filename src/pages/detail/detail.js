@@ -130,14 +130,14 @@ const DetailProduct = () => {
               </h1>
               <div className="sm:absolute sm:bottom-0 sm:left-0">
                 <button
-                  className="bg-indigo-500 hover:bg-indigo-600 text-white mr-4 px-4 py-2 rounded mt-2 focus:outline-none"
+                  className="bg-main hover:bg-main-light text-white mr-4 px-4 py-2 rounded mt-2 focus:outline-none"
                   onClick={(e) => handleAddItemToCart(e, dataDetail.id)}
                 >
                   Add to cart
                 </button>
                 <button
                   onClick={(e) => handleAddAndDirectPage(e, dataDetail.id)}
-                  className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded mt-2 focus:outline-none"
+                  className="bg-main hover:bg-main-light text-white px-4 py-2 rounded mt-2 focus:outline-none"
                 >
                   Buy now
                 </button>

@@ -6,8 +6,10 @@ const AllProducts = (props) => {
 
   return (
     <>
-      <div className="sm:bg-indigo-200 sm:p-8 mt-16 rounded">
-        <h2 className="text-xl font-bold text-center ">All products</h2>
+      <div className="sm:bg-main-light sm:p-8 mt-16 rounded">
+        <h2 className="text-xl font-bold text-center text-white">
+          All products
+        </h2>
         <ListCards loading={loading} data={data} />
       </div>
     </>

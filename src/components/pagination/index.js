@@ -3,7 +3,13 @@ import { Pagination } from "antd";
 
 function PaginationComponent(props) {
   const { getCurrentPage, currentPage, data } = props;
-
+  const transition = () => {
+    window.scrollTo(0, 1900);
+  };
+  const handleChangePage = (val) => {
+    getCurrentPage(val);
+    transition();
+  };
   return (
     <div className="flex justify-center m-8">
       <Pagination
@@ -13,7 +19,7 @@ function PaginationComponent(props) {
         pageSize={10}
         showQuickJumper
         hideOnSinglePage
-        onChange={(val) => getCurrentPage(val)}
+        onChange={(val) => handleChangePage(val)}
       />
     </div>
   );

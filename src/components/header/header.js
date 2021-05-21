@@ -39,14 +39,14 @@ const HeaderComponent = () => {
   };
   return (
     // <!-- component -->
-    <nav className="bg-purple-300 h-auto sm:bg-indigo-200 shadow fixed z-10 top-0 right-0 left-0">
+    <nav className="bg-main h-auto sm:bg-main shadow fixed z-10 top-0 right-0 left-0">
       <div className="container mx-auto md:flex md:justify-between md:items-center">
         <Link
           to="/home"
-          className="flex flex-row-reverse justify-between relative z-10 items-center px-6 py-3 sm:rounded h-full bg-purple-300 border-b-2"
+          className="flex flex-row-reverse justify-between relative z-10 items-center px-6 py-3 sm:rounded h-full bg-main"
         >
           <div className="hidden sm:block">
-            <div className="text-gray-800 text-xl font-medium md:text-2xl hover:text-indigo-500">
+            <div className="text-white text-xl font-medium md:text-2xl hover:text-main-light">
               FOODS & DRINKS
             </div>
           </div>
@@ -71,7 +71,7 @@ const HeaderComponent = () => {
             <button
               onClick={handleShowMenu}
               type="button"
-              className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
+              className="text-gray-500 hover:text-main-light focus:outline-none focus:text-main-light"
               aria-label="toggle menu"
             >
               <svg viewBox="0 0 24 24" className="h-8 w-8 fill-current">
@@ -93,27 +93,27 @@ const HeaderComponent = () => {
           <div className="flex flex-col md:flex-row md:mx-6 ">
             <Link
               to="/home"
-              className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+              className="my-1 text-sm text-white font-medium hover:text-main-light md:mx-4 md:my-0"
             >
               Home
             </Link>
-            <Link className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+            <Link className="my-1 text-sm text-white font-medium hover:text-main-light md:mx-4 md:my-0">
               Contact
             </Link>
-            <Link className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+            <Link className="my-1 text-sm text-white font-medium hover:text-main-light md:mx-4 md:my-0">
               About
             </Link>
             <div className="md:hidden">
               {data ? (
                 <div className="group flex flex-col">
-                  <Link className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0">
+                  <Link className="my-1 text-sm text-white font-medium hover:text-main-light md:mx-4 md:my-0">
                     Settings
                   </Link>
 
                   <Link
                     to="/login"
                     onClick={() => handleLogout()}
-                    className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                    className="my-1 text-sm text-white font-medium hover:text-main-light md:mx-4 md:my-0"
                   >
                     Logout
                   </Link>
@@ -121,7 +121,7 @@ const HeaderComponent = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="my-1 text-sm text-gray-800 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                  className="my-1 text-sm text-white font-medium hover:text-main-light md:mx-4 md:my-0"
                 >
                   Login
                 </Link>
@@ -132,7 +132,7 @@ const HeaderComponent = () => {
           <div className="flex justify-center md:block">
             <Link
               to="/cart"
-              className="relative text-gray-800 hover:text-gray-600"
+              className="relative text-white hover:text-main-light"
             >
               <svg
                 className="h-5 w-5"
@@ -148,7 +148,7 @@ const HeaderComponent = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span className="absolute -top-3 left-3 text-center w-6 h-6 flex justify-center items-center rounded-full bg-indigo-500 text-white p-1 text-xs">
+              <span className="absolute -top-3 left-3 text-center w-6 h-6 flex justify-center items-center rounded-full bg-main-light text-white p-1 text-xs">
                 {countItem}
               </span>
             </Link>
@@ -170,7 +170,7 @@ const HeaderComponent = () => {
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />
-                      <div className="text-sm invisible lg:visible text-gray-800 font-medium ml-2 hover:text-indigo-500">
+                      <div className="text-sm invisible lg:visible text-white font-medium ml-2 hover:text-main-light">
                         Hi, {data.user.userName}
                       </div>
                     </div>
@@ -186,7 +186,7 @@ const HeaderComponent = () => {
                 >
                   <Link
                     href="!#"
-                    className="block px-4 py-2 text-sm text-gray-800 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                    className="block px-4 py-2 text-sm text-black my-1  font-medium hover:text-main-light md:mx-4 md:my-0"
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-1"
@@ -197,7 +197,7 @@ const HeaderComponent = () => {
                   <Link
                     to="/login"
                     onClick={() => handleLogout()}
-                    className="block px-4 py-2 text-sm text-gray-800 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                    className="block px-4 py-2 text-sm text-black my-1  font-medium hover:text-main-light md:mx-4 md:my-0"
                   >
                     Logout
                   </Link>
@@ -206,7 +206,7 @@ const HeaderComponent = () => {
             ) : (
               <Link
                 to="/login"
-                className="block px-4 py-2 text-sm text-gray-800 my-1  font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+                className="block px-4 py-2 text-sm text-black my-1  font-medium hover:text-main-light md:mx-4 md:my-0"
               >
                 Login
               </Link>

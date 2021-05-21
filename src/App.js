@@ -20,6 +20,12 @@ const CheckoutPage = lazy(() => import("./pages/checkout/index"));
 const DetailPage = lazy(() => import("./pages/detail/detail"));
 const SearchPage = lazy(() => import("./pages/search/index"));
 const ConfirmOrderPage = lazy(() => import("./pages/confirmOrder/index"));
+const AdminPage = lazy(() => import("./pages/admin/index"));
+
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://shopping-cart-apii.herokuapp.com"
+    : "http://localhost:8000";
 
 const App = () => {
   useEffect(() => {
@@ -62,6 +68,9 @@ const App = () => {
               </Route>
               <Route exact path="/confirm">
                 <ConfirmOrderPage />
+              </Route>
+              <Route exact path="/admin">
+                <AdminPage />
               </Route>
             </Switch>
           </Suspense>

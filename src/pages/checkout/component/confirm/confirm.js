@@ -91,7 +91,7 @@ function Confirm() {
           )}
         </div>
 
-        <div className="px-4 sm:mt-8 sm:mb-48 flex-1 bg-indigo-200 rounded sticky top-0">
+        <div className="px-4 sm:mt-8 sm:mb-48 flex-1 bg-main-light bg-opacity-80 rounded sticky top-0">
           <h2 className="pt-4 block text-xl text-center font-bold">
             Confirm Your Information
           </h2>
@@ -149,12 +149,12 @@ function Confirm() {
                 <h2 className="text-xl">Total Money: </h2>
                 <h2 className="text-lg ml-2">
                   {sumMoney.toLocaleString()}{" "}
-                  <span className="text-sm text-red-500">VND</span>
+                  <span className="text-sm text-red-700">VND</span>
                 </h2>
               </div>
               <button
                 onClick={(e) => handleSubmit(e)}
-                className="text-md font-md sm:px-16 px-4 py-2 bg-indigo-500 mb-4 mt-6 hover:bg-indigo-700 focus:outline-none text-white rounded"
+                className="text-md font-md sm:px-16 px-4 py-2 bg-main mb-4 mt-6 hover:bg-opacity-80 focus:outline-none text-white rounded"
               >
                 Confirm
               </button>

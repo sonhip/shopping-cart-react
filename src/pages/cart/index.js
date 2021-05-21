@@ -6,7 +6,7 @@ function CartPage(props) {
   return (
     <>
       <HeaderComponent />
-      <div className="container mx-auto mt-20">
+      <div className="container mx-auto">
         <ListItemsCart />
       </div>
     </>

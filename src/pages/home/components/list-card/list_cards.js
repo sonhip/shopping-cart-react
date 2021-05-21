@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AiFillHeart } from "react-icons/ai";
 import "./list_card.scss";
 import Loading from "components/loading/loading";
 import { useDispatch } from "react-redux";
@@ -42,7 +41,7 @@ const ListCards = (props) => {
   };
   return (
     <>
-      {data.length > 0 ? (
+      {data?.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {data.map((item) => {
             return (
@@ -75,15 +74,7 @@ const ListCards = (props) => {
                     <span
                       onClick={(e) => handleLike(e)}
                       class="home-product-item__like home-product-item__like--liked"
-                    >
-                      <AiFillHeart
-                        className={`${
-                          like
-                            ? "home-product-item__like-icon-fill"
-                            : "home-product-item__like-icon-empty"
-                        } far fa-heart mt-2`}
-                      />
-                    </span>
+                    ></span>
                     <div class="home-product-item__rating">
                       <Rate disabled allowHalf defaultValue={4.5} />
                     </div>
@@ -91,9 +82,10 @@ const ListCards = (props) => {
                   <div class="home-product-item__origin">
                     <button
                       onClick={(e) => {
+                        e.preventDefault();
                         handleAddItemToCart(e, item.id);
                       }}
-                      class="home-product-item__brand focus:outline-none text-white text-sm px-3 mb-2 py-1 bg-indigo-500 rounded hover:bg-indigo-700"
+                      class="home-product-item__brand focus:outline-none text-white text-sm px-3 mb-2 py-1 bg-main-light rounded hover:bg-main"
                     >
                       Add to cart
                     </button>

@@ -95,7 +95,7 @@ const Auto = (props) => {
   };
   return (
     <div className="">
-      <div className="carousel_pd p-8 rounded bg-indigo-200">
+      <div className="carousel_pd p-8 rounded bg-main-light">
         <Slider {...settings}>
           {data.map((item) => (
             <Link
@@ -114,7 +114,7 @@ const Auto = (props) => {
                     </div>
                     <button
                       onClick={(e) => handleAddItemToCart(e, item.id)}
-                      className="bg-indigo-500 hover:bg-indigo-600 px-3 py-2 rounded text-white mt-2"
+                      className="bg-main-light hover:bg-main px-3 py-2 rounded text-white mt-2 focus:outline-none"
                     >
                       Add to cart
                     </button>

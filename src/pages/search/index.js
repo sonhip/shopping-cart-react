@@ -41,10 +41,11 @@ const SearchPage = () => {
         className="container mx-auto bg-content"
         style={{ marginTop: "65px" }}
       >
-        <div className="flex h-16 items-center bg-red-200 px-16 mt-32">
+        <div className="flex h-16 items-center bg-main-light px-16 mt-32">
           <AiOutlineFileSearch className="text-2xl" />
           <div className="text-lg font-medium ml-2">
-            The result of keyword <span>"{keyword}"</span>
+            The result of keyword{" "}
+            <span className="text-white">"{keyword}"</span>
           </div>
         </div>
         {filter.length > 0 && keyword.length > 1 ? (
@@ -52,7 +53,7 @@ const SearchPage = () => {
             <div>
               <FilterComponent handleChange={handleChange} />
             </div>
-            <div className="bg-indigo-200 px-8 pb-8">
+            <div className="bg-main-light px-8 pb-8">
               <ListProducts data={filter} loading={loading} />
             </div>
           </div>

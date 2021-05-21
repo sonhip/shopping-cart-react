@@ -24,11 +24,19 @@ function CartPage(props) {
   };
   return (
     <div>
-      <ListItems
-        dataCart={dataCart}
-        handleDeleteItem={handleDeleteItem}
-        handleChangeQty={handleChangeQty}
-      />
+      {dataCart.length > 0 ? (
+        <ListItems
+          dataCart={dataCart}
+          handleDeleteItem={handleDeleteItem}
+          handleChangeQty={handleChangeQty}
+        />
+      ) : (
+        <div className="mt-64">
+          <h2 className="text-center text-3xl font-bold">
+            There's no item in cart!
+          </h2>
+        </div>
+      )}
       <FooterCart sumMoney={totalMoney} />
     </div>
   );

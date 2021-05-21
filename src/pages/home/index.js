@@ -38,7 +38,6 @@ const HomePage = () => {
   const handleChangePage = (page) => {
     setNewDataPerPage(dataPerPage[page - 1]);
     setCurrentPage(page);
-    window.scrollTo(0, 0);
   };
   const dataLatestProducts = data.filter((item) => item.kind === "latest");
   const dataTopSellingProducts = data.filter(
@@ -50,20 +49,20 @@ const HomePage = () => {
         <Carousel />
       </div>
       <LayoutComponent>
-        <div className="bg-indigo-200 mt-16 rounded">
+        <div className="mt-16 rounded">
           <h2
             style={{ marginBottom: 0 }}
-            className="text-center pt-4 font-bold text-md sm:text-xl"
+            className="text-center py-4 font-bold text-md sm:text-xl bg-main text-white rounded-t"
           >
             {" "}
             Latest Products{" "}
           </h2>
           <CarouselProduct data={dataLatestProducts} />
         </div>
-        <div className="bg-indigo-200 mt-16 rounded">
+        <div className=" mt-16 rounded">
           <h2
             style={{ marginBottom: 0 }}
-            className="text-center pt-4 font-bold text-md sm:text-xl mb-4"
+            className="text-center py-4 font-bold text-md sm:text-xl bg-main text-white rounded-t"
           >
             {" "}
             Top Selling{" "}
