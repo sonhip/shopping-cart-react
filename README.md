@@ -1,10 +1,9 @@
-# Getting Started with Create React App
+# Introduce
+This is a project about eCommerce website to selling food&drink. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Feature
 
-## Available Scripts
 
-In the project directory, you can run:
 
 ### `npm start`
 
